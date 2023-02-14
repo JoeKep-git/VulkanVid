@@ -3,6 +3,12 @@
 #include<iostream>
 #include<stdexcept>
 
+/*
+* got to video 4 10 min 30 in
+*/
+
+
+
 using namespace std;
 
 int main()

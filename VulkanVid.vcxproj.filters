@@ -33,12 +33,18 @@
     <ClCompile Include="pipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="device.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pipeline.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="device.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

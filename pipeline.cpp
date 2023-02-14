@@ -8,9 +8,14 @@ using namespace std;
 
 namespace lve 
 {
-	PipeLine::PipeLine(const std::string& vertFilePath, const std::string& fragFilePath)
+	PipeLine::PipeLine(
+		LveDevice& device,
+		const std::string& vertFilePath,
+		const std::string& fragFilePath,
+		const PipeLineConfigInfo& configInfo) 
+		: LveDevice(device)
 	{
-		createGraphicsPipeline(vertFilePath, fragFilePath);
+		createGraphicsPipeline(vertFilePath, fragFilePath, configInfo);
 	}
 
 	std::vector<char> PipeLine::readFile(const std::string filePath)
@@ -32,6 +37,15 @@ namespace lve
 			file.close();
 			return buffer;
 		}
+	}
+
+	void PipeLine::createGraphicsPipeline(
+		const std::string& vertFilePath, 
+		const std::string& fragFilePath, 
+		const PipeLineConfigInfo& configInfo)
+	{
+		auto vertCode = readFile(vertFilePath);
+		auto fragCode = readFile(configInfo);
 	}
 
 	void PipeLine::createGraphicsPipeline(const std::string& vertFilePath, const std::string& fragFilePath)
