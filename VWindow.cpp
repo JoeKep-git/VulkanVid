@@ -1,6 +1,8 @@
 #include "vulkanWindow.hpp"
 #include <iostream>
+#include <stdexcept>
 
+using namespace std;
 
 namespace lve
 {
@@ -19,6 +21,15 @@ namespace lve
 	{
 		return glfwWindowShouldClose(window);
 	}
+
+	void VWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface)
+	{
+		if(glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS)
+		{
+			throw runtime_error("failed to create window surface");
+		}
+	}
+
 
 	void VWindow::initWindow()
 	{
