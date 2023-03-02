@@ -6,7 +6,9 @@
 #include <set>
 #include <unordered_set>
 
-namespace Lve {
+#include "vulkanWindow.hpp"
+
+namespace lve {
 
 // local callback functions
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(

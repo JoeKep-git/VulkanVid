@@ -6,7 +6,7 @@
 
 #include "vulkanWindow.hpp"
 
-namespace Lve {
+namespace lve {
 
 struct SwapChainSupportDetails {
   VkSurfaceCapabilitiesKHR capabilities;
@@ -93,7 +93,7 @@ class LveDevice {
   VkInstance instance;
   VkDebugUtilsMessengerEXT debugMessenger;
   VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-  LveWindow &window;
+  VWindow &window;
   VkCommandPool commandPool;
 
   VkDevice device_;

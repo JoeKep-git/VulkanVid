@@ -9,19 +9,20 @@ using namespace std;
 namespace lve 
 {
 	PipeLine::PipeLine(
-		LveDevice& device,
+		//LveDevice& device,
 		const std::string& vertFilePath,
-		const std::string& fragFilePath,
-		const PipeLineConfigInfo& configInfo) 
-		: LveDevice(device)
+		const std::string& fragFilePath)
+		//const PipeLineConfigInfo& configInfo) 
+		//: LveDevice(device)
 	{
-		createGraphicsPipeline(vertFilePath, fragFilePath, configInfo);
+		createGraphicsPipeline(vertFilePath, fragFilePath);
 	}
 
 	std::vector<char> PipeLine::readFile(const std::string filePath)
 	{
 		std::ifstream file(filePath, std::ios::ate | std::ios::binary);
 
+		//this part is not working - check to see what is wrong
 		if (!file.is_open())
 		{
 			//filepath is incorrect or do not have permissions
@@ -39,14 +40,14 @@ namespace lve
 		}
 	}
 
-	void PipeLine::createGraphicsPipeline(
+	/*void PipeLine::createGraphicsPipeline(
 		const std::string& vertFilePath, 
 		const std::string& fragFilePath, 
 		const PipeLineConfigInfo& configInfo)
 	{
 		auto vertCode = readFile(vertFilePath);
-		auto fragCode = readFile(configInfo);
-	}
+		auto fragCode = readFile(fragFilePath);
+	}*/
 
 	void PipeLine::createGraphicsPipeline(const std::string& vertFilePath, const std::string& fragFilePath)
 	{

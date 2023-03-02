@@ -19,10 +19,10 @@ namespace lve {
 	{
 	public:
 		PipeLine(
-			LveDevice& device,
+			//	LveDevice& device,
 			const std::string& vertFilePath,
-			const std::string& fragFilePath, 
-			const PipeLineConfigInfo& configInfo);
+			const std::string& fragFilePath);
+			//const PipeLineConfigInfo& configInfo);
 
 		~PipeLine() {}
 
@@ -37,14 +37,13 @@ namespace lve {
 
 		void createGraphicsPipeline(
 			const std::string& vertFilePath, 
-			const std::string& fragFilePath, 
-			const PipeLineConfigInfo& configInfo);
+			const std::string& fragFilePath);
 
 		void createShaderModule(const vector<char>& code, VkShaderModule shaderModule);
 
 		//only used when there is an implicit relationship that the 
 		//member variable will outlive the containing class that depend on this
-		LveDevice& lveDevice;
+		//LveDevice& lveDevice;
 
 		//typedef pointers
 		VkPipeline graphicsPipeline;
