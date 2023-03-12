@@ -2,6 +2,7 @@
 
 #include "vulkanWindow.hpp"
 #include "pipeline.hpp"
+#include "device.hpp"
 
 namespace lve {
 	class FirstApplication
@@ -14,6 +15,11 @@ namespace lve {
 
 	private:
 		VWindow vWindow{ WIDTH, HEIGHT, "Vulkan World!" };
-		PipeLine pipeLine{ "simple_shader.vert.spv", "simple_shader.frag.spv"};
+		LveDevice lveDevice{ vWindow };
+		PipeLine pipeLine{ 
+			lveDevice, 
+			"simple_shader.vert.spv", 
+			"simple_shader.frag.spv", 
+			PipeLine::defaultPipeLineConfigInfo(WIDTH, HEIGHT)};
 	};
 }

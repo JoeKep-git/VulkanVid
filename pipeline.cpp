@@ -9,13 +9,13 @@ using namespace std;
 namespace lve 
 {
 	PipeLine::PipeLine(
-		//LveDevice& device,
+		LveDevice& device,
 		const std::string& vertFilePath,
-		const std::string& fragFilePath)
-		//const PipeLineConfigInfo& configInfo) 
-		//: LveDevice(device)
+		const std::string& fragFilePath,
+		const PipeLineConfigInfo& configInfo) 
+		: lveDevice{device}
 	{
-		createGraphicsPipeline(vertFilePath, fragFilePath);
+		createGraphicsPipeline(vertFilePath, fragFilePath, configInfo);
 	}
 
 	std::vector<char> PipeLine::readFile(const std::string filePath)
@@ -48,7 +48,7 @@ namespace lve
 		auto fragCode = readFile(fragFilePath);
 	}*/
 
-	void PipeLine::createGraphicsPipeline(const std::string& vertFilePath, const std::string& fragFilePath)
+	void PipeLine::createGraphicsPipeline(const std::string& vertFilePath, const std::string& fragFilePath, const PipeLineConfigInfo& configInfo)
 	{
 		auto vertCode = readFile(vertFilePath);
 		auto fragCode = readFile(fragFilePath);
@@ -56,6 +56,28 @@ namespace lve
 		cout << "Vertex Shader Code Size: " << vertCode.size() << '\n';
 		cout << "Fragment Shader Code Size: " << fragCode.size() << '\n';
 	}
+
+	void PipeLine::createShaderModule(const vector<char>& code, VkShaderModule* shaderModule)
+	{
+		VkShaderModuleCreateInfo createInfo{};
+
+		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+		createInfo.codeSize = code.size();
+		createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+
+		if (vkCreateShaderModule(lveDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create shader module");
+		}
+	}
+
+	PipeLineConfigInfo PipeLine::defaultPipeLineConfigInfo(uint32_t width, uint32_t height)
+	{
+		PipeLineConfigInfo configInfo{};
+
+		return configInfo;
+	}
+
 }
 
 
