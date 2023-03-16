@@ -5,16 +5,18 @@
 #include <string>
 #include <vector>
 #include <cassert>
-#include "device.hpp"
 
 using namespace std;
 
 namespace lve {
 
-	struct PipelineConfigInfo {
+	struct PipelineConfigInfo 
+	{
+		PipelineConfigInfo(const PipelineConfigInfo&) = delete;
+		PipelineConfigInfo& operator=(const PipelineConfigInfo&) = delete;
+
 		VkViewport viewport;
 		VkRect2D scissor;
-		VkPipelineViewportStateCreateInfo viewportInfo;
 		VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
 		VkPipelineRasterizationStateCreateInfo rasterizationInfo;
 		VkPipelineMultisampleStateCreateInfo multisampleInfo;
@@ -38,9 +40,9 @@ namespace lve {
 		~PipeLine();
 
 		PipeLine(const PipeLine&) = delete;
-		void operator=(const PipeLine&) = delete;
+		PipeLine &operator=(const PipeLine&) = delete;
 
-		static PipelineConfigInfo defaultPipeLineConfigInfo(uint32_t width, uint32_t height);
+		static void defaultPipeLineConfigInfo(PipelineConfigInfo& configInfo, uint32_t width, uint32_t height);
 
 	private:
 		static std::vector<char> readFile(const std::string filePath);

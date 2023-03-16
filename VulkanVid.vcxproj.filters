@@ -24,7 +24,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vulkanWindow.hpp">
+    <ClCompile Include="VWindow.hpp">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="application.cpp">
@@ -36,6 +36,9 @@
     <ClCompile Include="device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="engineSwapChain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.hpp">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="device.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engineSwapChain.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

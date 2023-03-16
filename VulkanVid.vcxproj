@@ -152,13 +152,15 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="device.cpp" />
+    <ClCompile Include="engineSwapChain.cpp" />
     <ClCompile Include="pipeline.cpp" />
-    <ClCompile Include="vulkanWindow.hpp" />
+    <ClCompile Include="VWindow.hpp" />
     <ClCompile Include="VWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.hpp" />
     <ClInclude Include="device.hpp" />
+    <ClInclude Include="engineSwapChain.hpp" />
     <ClInclude Include="pipeline.hpp" />
   </ItemGroup>
   <ItemGroup>
