@@ -4,6 +4,7 @@
 #include "pipeline.hpp"
 #include "device.hpp"
 #include "engineSwapChain.hpp"
+#include "model.hpp"
 
 //std
 #include <memory>
@@ -25,16 +26,20 @@ namespace lve {
 		void run();
 
 	private:
+		void loadModels();
 		void createPipelinelayout();
 		void createPipeline();
 		void createCommandBuffers();
 		void drawFrame();
+		void recreateSwapChain();
+		void recordCommandBuffer(int imageIndex);
 
 		VWindow vWindow{ WIDTH, HEIGHT, "Vulkan World!" };
 		LveDevice lveDevice{ vWindow };
-		LveSwapChain lveSwapChain{ lveDevice, vWindow.getExtent() };
+		std::unique_ptr<LveSwapChain> lveSwapChain;
 		std::unique_ptr<PipeLine> lvePipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
+		std::unique_ptr<Model> model;
 	};
 }

@@ -16,6 +16,18 @@ namespace lve
 		glfwDestroyWindow(window);
 		glfwTerminate();
 	}
+	
+	void VWindow::initWindow()
+	{
+		glfwInit();
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+		//handling resizing elsewhere
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+
+		window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
+		glfwSetWindowUserPointer(window, this);
+		glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
+	}
 
 	bool VWindow::shouldClose()
 	{
@@ -30,15 +42,12 @@ namespace lve
 		}
 	}
 
-
-	void VWindow::initWindow()
+	void VWindow::framebufferResizeCallback(GLFWwindow* window, int width, int height)
 	{
-		glfwInit();
-		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		//handling resizing elsewhere
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-
-		window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
+		auto vWindow = reinterpret_cast<VWindow*>(glfwGetWindowUserPointer(window));
+		vWindow->framebufferResized = true;
+		vWindow->width = width;
+		vWindow->height = height;
 	}
 }
 
