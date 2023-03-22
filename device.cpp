@@ -265,6 +265,8 @@ namespace lve
                                 VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
         createInfo.pfnUserCallback = debugCallback;
         createInfo.pUserData = nullptr;  // Optional
+
+        cout << createInfo.sType << endl;
     }
 
     void LveDevice::setupDebugMessenger() 
