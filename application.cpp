@@ -55,6 +55,23 @@ namespace lve
 		}
 	}
 
+	void FirstApplication::createPipeline()
+	{
+		assert(lveSwapChain != nullptr && "Cannot create pipeline before swap chain");
+		assert(pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout");
+
+		PipelineConfigInfo pipelineConfig{};
+		PipeLine::defaultPipeLineConfigInfo(
+			pipelineConfig);
+		pipelineConfig.renderPass = lveSwapChain->getRenderPass();
+		pipelineConfig.pipelineLayout = pipelineLayout;
+		lvePipeline = std::make_unique<PipeLine>(
+			lveDevice,
+			"shaders/simple_shader.vert.spv",
+			"shaders/simple_shader.frag.spv",
+			pipelineConfig);
+	}
+
 	void FirstApplication::recreateSwapChain()
 	{
 		auto extent = vWindow.getExtent();
@@ -83,23 +100,6 @@ namespace lve
 
 		//if render pass compatible do nothing else
 		createPipeline();
-	}
-
-	void FirstApplication::createPipeline()
-	{
-		assert(lveSwapChain != nullptr && "Cannot create pipeline before swap chain");
-		assert(pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout");
-
-		PipelineConfigInfo pipelineConfig{};
-		PipeLine::defaultPipeLineConfigInfo(
-			pipelineConfig);
-		pipelineConfig.renderPass = lveSwapChain->getRenderPass();
-		pipelineConfig.pipelineLayout = pipelineLayout;
-		lvePipeline = std::make_unique<PipeLine>(
-			lveDevice,
-			"shaders/simple_shader.vert.spv",
-			"shaders/simple_shader.frag.spv",
-			pipelineConfig);
 	}
 
 	void FirstApplication::createCommandBuffers()

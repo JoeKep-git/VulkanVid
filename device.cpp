@@ -247,11 +247,13 @@ namespace lve
             swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
         }
 
+        VkPhysicalDeviceProperties deviceProperties;
         VkPhysicalDeviceFeatures supportedFeatures;
         vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
+        vkGetPhysicalDeviceProperties(device, &deviceProperties);
 
         return indices.isComplete() && extensionsSupported && swapChainAdequate &&
-                supportedFeatures.samplerAnisotropy;
+            supportedFeatures.samplerAnisotropy && deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU;
     }
 
     void LveDevice::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT &createInfo) 

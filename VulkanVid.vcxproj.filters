@@ -61,12 +61,20 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="simple_shader.vert">
+    <None Include="shaders\simple_shader.frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="simple_shader.frag">
+    <None Include="shaders\simple_shader.frag.spv">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="compile.bat" />
+    <None Include="shaders\simple_shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\simple_shader.vert.spv">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\compile.bat">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

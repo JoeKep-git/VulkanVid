@@ -34,7 +34,7 @@ namespace lve
 
 	private:
 
-		static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
+		static void framebufferResizeCallback(GLFWwindow *window, int width, int height);
 
 		void initWindow();
 
