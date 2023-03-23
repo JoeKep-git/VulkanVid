@@ -60,6 +60,9 @@ namespace lve
 		auto vertCode = readFile(vertFilePath);
 		auto fragCode = readFile(fragFilePath);
 
+		cout << "Vertex Shader Code Size: " << vertCode.size() << '\n';
+		cout << "Fragment Shader Code Size: " << fragCode.size() << '\n';
+
 		createShaderModule(vertCode, &vertShaderModule);
 		createShaderModule(fragCode, &fragShaderModule);
 
