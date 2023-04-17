@@ -29,17 +29,18 @@ namespace lve
 		glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
 	}
 
-	bool VWindow::shouldClose()
-	{
-		return glfwWindowShouldClose(window);
-	}
-
 	void VWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface)
 	{
 		if(glfwCreateWindowSurface(instance, window, nullptr, surface) != VK_SUCCESS)
 		{
 			throw runtime_error("failed to create window surface");
 		}
+	}
+
+	//put this under create window surface
+	bool VWindow::shouldClose()
+	{
+		return glfwWindowShouldClose(window);
 	}
 
 	void VWindow::framebufferResizeCallback(GLFWwindow *window, int width, int height)
