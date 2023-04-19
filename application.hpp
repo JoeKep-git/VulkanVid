@@ -3,8 +3,8 @@
 #include "VWindow.hpp"
 #include "pipeline.hpp"
 #include "device.hpp"
-#include "engineSwapChain.hpp"
 #include "gameObject.hpp"
+#include "Renderer.hpp"
 
 //std
 #include <memory>
@@ -29,19 +29,14 @@ namespace lve {
 		void loadGameObjects();
 		void createPipelinelayout();
 		void createPipeline();
-		void createCommandBuffers();
-		void freeCommandBuffers();
-		void drawFrame();
-		void recreateSwapChain();
-		void recordCommandBuffer(int imageIndex);
 		void renderGameObjects(VkCommandBuffer commandBuffer);
 
 		VWindow vWindow{ WIDTH, HEIGHT, "Vulkan World!" };
 		LveDevice lveDevice{ vWindow };
-		std::unique_ptr<LveSwapChain> lveSwapChain;
+		Renderer renderer{ vWindow, lveDevice };
+
 		std::unique_ptr<PipeLine> lvePipeline;
 		VkPipelineLayout pipelineLayout;
-		std::vector<VkCommandBuffer> commandBuffers;
 		std::vector <GameObject> gameObjects;
 	};
 }
