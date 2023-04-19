@@ -164,6 +164,7 @@
     <ClCompile Include="model.cpp" />
     <ClCompile Include="pipeline.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="VWindow.hpp" />
     <ClCompile Include="VWindow.cpp" />
   </ItemGroup>
@@ -175,6 +176,7 @@
     <ClInclude Include="model.hpp" />
     <ClInclude Include="pipeline.hpp" />
     <ClInclude Include="Renderer.hpp" />
+    <ClInclude Include="RenderSystem.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat" />
