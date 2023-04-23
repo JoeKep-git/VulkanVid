@@ -6,13 +6,13 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
+#include <iostream>
 
 namespace lve
 {
 	struct SimplePushConstantData
 	{
-		glm::mat2 transform{ 1.f };
-		glm::vec2 offset;
+		glm::mat4 transform{ 1.f };
 		alignas(16) glm::vec3 color;
 	};
 
@@ -66,27 +66,23 @@ namespace lve
 
 	void RenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects)
 	{
-		int i = 0;
-		for (auto& obj : gameObjects)
-		{
-			i += 1;
-			//for smooth roation you will need to be using v-sync, otherwise the amount you increment needs to be
-			//proportional to the time between frames
-			obj.transform2d.rotation =
-				glm::mod<float>(obj.transform2d.rotation + 0.001f * i, 2.f * glm::pi<float>());
-		}
-
 		lvePipeline->bind(commandBuffer);
 
 		for (auto& obj : gameObjects)
 		{
+			//for smooth roation you will need to be using v-sync, otherwise the amount you increment needs to be
+			//proportional to the time between frames
+			obj.transform.rotation.y =
+				glm::mod<float>(obj.transform.rotation.y + 0.01f, glm::two_pi<float>());
+			obj.transform.rotation.x =
+				glm::mod<float>(obj.transform.rotation.x + 0.005f, glm::two_pi<float>());
+
 			SimplePushConstantData push{};
-
-			push.offset = obj.transform2d.translation;
 			push.color = obj.color;
-			push.transform = obj.transform2d.mat2();
+			push.transform = obj.transform.mat4();
 
-			vkCmdPushConstants(commandBuffer,
+			vkCmdPushConstants(
+				commandBuffer,
 				pipelineLayout,
 				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
 				0,
