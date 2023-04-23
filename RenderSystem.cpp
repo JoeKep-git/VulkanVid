@@ -64,9 +64,18 @@ namespace lve
 			pipelineConfig);
 	}
 
-	void RenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects)
+	void RenderSystem::renderGameObjects(
+		VkCommandBuffer commandBuffer,
+		std::vector<GameObject>& gameObjects,
+		const Camera& camera)
 	{
 		lvePipeline->bind(commandBuffer);
+
+		//float fovy = glm::radians(45.f);
+		//float aspectRatio = 800.f / 600.f;
+		//float near = 0.001f;
+		//float far = 10.f;
+		//auto perspective = perspectiveProjection(fovy, aspectRatio, near, far);
 
 		for (auto& obj : gameObjects)
 		{
@@ -79,7 +88,7 @@ namespace lve
 
 			SimplePushConstantData push{};
 			push.color = obj.color;
-			push.transform = obj.transform.mat4();
+			push.transform = camera.getProjection() * obj.transform.mat4();
 
 			vkCmdPushConstants(
 				commandBuffer,

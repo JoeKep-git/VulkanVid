@@ -3,6 +3,7 @@
 #include "pipeline.hpp"
 #include "device.hpp"
 #include "gameObject.hpp"
+#include "camera.hpp"
 
 //std
 #include <memory>
@@ -18,7 +19,10 @@ namespace lve {
 		RenderSystem(const RenderSystem&) = delete;
 		RenderSystem& operator=(const RenderSystem&) = delete;
 
-		void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects);
+		void renderGameObjects(
+			VkCommandBuffer commandBuffer, 
+			std::vector<GameObject> &gameObjects, 
+			const Camera &camera);
 
 	private:
 		void createPipelinelayout();

@@ -37,7 +37,7 @@ namespace lve
 		}
 	}
 
-	void VWindow::framebufferResizeCallback(GLFWwindow *window, int width, int height)
+	void VWindow::framebufferResizeCallback(GLFWwindow* window, int width, int height)
 	{
 		auto vWindow = reinterpret_cast<VWindow*>(glfwGetWindowUserPointer(window));
 		vWindow->framebufferResized = true;
