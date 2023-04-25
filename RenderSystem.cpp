@@ -71,6 +71,8 @@ namespace lve
 	{
 		lvePipeline->bind(commandBuffer);
 
+		auto projectionView = camera.getProjection() * camera.getView();
+
 		//float fovy = glm::radians(45.f);
 		//float aspectRatio = 800.f / 600.f;
 		//float near = 0.001f;
@@ -88,7 +90,7 @@ namespace lve
 
 			SimplePushConstantData push{};
 			push.color = obj.color;
-			push.transform = camera.getProjection() * obj.transform.mat4();
+			push.transform = projectionView * obj.transform.mat4();
 
 			vkCmdPushConstants(
 				commandBuffer,
