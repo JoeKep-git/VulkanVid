@@ -1,8 +1,10 @@
 #include "application.hpp"
 #include "RenderSystem.hpp"
 #include "camera.hpp"
+#include "keyboardMovement.hpp"
 #include <stdexcept>
 #include <array>
+#include <chrono>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -28,9 +30,26 @@ namespace lve
 		//camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f, 0.f, 1.f));
 		camera.setViewTarget(glm::vec3(-1.f, -2.f, 2.f), glm::vec3(0.f, 0.f, 2.5f));
 
+		auto viewerObject = GameObject::createGameObject();
+		KeyboardMovement cameraController{};
+
+		auto currentTime = std::chrono::high_resolution_clock::now();
+
 		while (!vWindow.shouldClose())
 		{
 			glfwPollEvents();
+
+			float MAX_FRAME_TIME = 1000.f;
+
+			auto newTime = std::chrono::high_resolution_clock::now();
+			float frameTime = 
+				std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+			currentTime = newTime;
+
+			frameTime = glm::min(frameTime, MAX_FRAME_TIME);
+
+			cameraController.moveInPlaneXZ(vWindow.getGLFWwindow(), frameTime, viewerObject);
+			camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
 
 			float aspect = renderer.getAspectRatio();
 			//camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);

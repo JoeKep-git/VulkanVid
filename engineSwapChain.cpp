@@ -434,7 +434,7 @@ namespace lve
         //    }
         //}
 
-        //does not update with the refresh rate of the display. will have tearing
+        //does not update with the refresh rate of the display. will have tearing but also no limit to fps
          for (const auto &availablePresentMode : availablePresentModes) 
          {
             if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) 

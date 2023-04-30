@@ -81,12 +81,7 @@ namespace lve
 
 		for (auto& obj : gameObjects)
 		{
-			//for smooth roation you will need to be using v-sync, otherwise the amount you increment needs to be
-			//proportional to the time between frames
-			obj.transform.rotation.y =
-				glm::mod<float>(obj.transform.rotation.y + 0.01f, glm::two_pi<float>());
-			obj.transform.rotation.x =
-				glm::mod<float>(obj.transform.rotation.x + 0.005f, glm::two_pi<float>());
+			
 
 			SimplePushConstantData push{};
 			push.color = obj.color;

@@ -37,12 +37,6 @@ namespace lve
 		}
 	}
 
-	//put this under create window surface
-	bool VWindow::shouldClose()
-	{
-		return glfwWindowShouldClose(window);
-	}
-
 	void VWindow::framebufferResizeCallback(GLFWwindow* window, int width, int height)
 	{
 		auto vWindow = reinterpret_cast<VWindow*>(glfwGetWindowUserPointer(window));
@@ -51,6 +45,10 @@ namespace lve
 		vWindow->height = height;
 	}
 
-
+	//put this under create window surface
+	bool VWindow::shouldClose()
+	{
+		return glfwWindowShouldClose(window);
+	}
 }
 

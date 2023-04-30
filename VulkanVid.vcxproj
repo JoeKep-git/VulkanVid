@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClCompile Include="application.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="keyboardMovement.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="device.cpp" />
     <ClCompile Include="engineSwapChain.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="device.hpp" />
     <ClInclude Include="engineSwapChain.hpp" />
     <ClInclude Include="gameObject.hpp" />
+    <ClInclude Include="keyboardMovement.hpp" />
     <ClInclude Include="model.hpp" />
     <ClInclude Include="pipeline.hpp" />
     <ClInclude Include="Renderer.hpp" />
