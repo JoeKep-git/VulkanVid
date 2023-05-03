@@ -16,6 +16,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{1c37641e-2ed5-44ec-97e6-324bb0bb38d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="models">
+      <UniqueIdentifier>{d96ba622-bd0c-4cf5-a44e-8e86f43a9266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyobj">
+      <UniqueIdentifier>{2f198f5d-1e1d-4b43-82ce-ecae53453ce8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VWindow.cpp">
@@ -85,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="keyboardMovement.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyobj\tiny_obj_loader.h">
+      <Filter>tinyobj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

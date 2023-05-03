@@ -10,6 +10,7 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
+#include <iostream>
 
 namespace lve
 {
@@ -128,7 +129,9 @@ namespace lve
 
 	void FirstApplication::loadGameObjects()
 	{
-		std::shared_ptr<Model> model = createCubeModel(lveDevice, { .0f,.0f,.0f });
+		std::cout << "loading game object\n";
+		//std::shared_ptr<Model> model = createCubeModel(lveDevice, { .0f,.0f,.0f });
+		std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/colored_cube.obj");
 
 		auto cube = GameObject::createGameObject();
 		cube.model = model;

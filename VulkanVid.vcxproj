@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>;$(ProjectDir)/tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader;$(ProjectDir);$(ProjectDir)\tinyobj</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>;$(ProjectDir)/tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader;$(ProjectDir);$(ProjectDir)\tinyobj</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\External Libraries\Vulkan\Include;$(ProjectDir)\External Libraries\GLFW\include;$(ProjectDir)\External Libraries\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\External Libraries\Vulkan\Include;$(ProjectDir)\External Libraries\GLFW\include;$(ProjectDir)\External Libraries\glm\glm;%(AdditionalIncludeDirectories);$(ProjectDir)/tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader;$(ProjectDir);$(ProjectDir)\tinyobj</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -143,7 +145,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\External Libraries\Vulkan\Include;$(ProjectDir)\External Libraries\GLFW\include;$(ProjectDir)\External Libraries\glm\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\External Libraries\Vulkan\Include;$(ProjectDir)\External Libraries\GLFW\include;$(ProjectDir)\External Libraries\glm\glm;%(AdditionalIncludeDirectories);$(ProjectDir)/tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader.h;$(ProjectDir)\tiny_obj_loader;$(ProjectDir);$(ProjectDir)\tinyobj</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -181,6 +183,8 @@
     <ClInclude Include="pipeline.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="RenderSystem.hpp" />
+    <ClInclude Include="tinyobj\tiny_obj_loader.h" />
+    <ClInclude Include="util.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\compile.bat" />
