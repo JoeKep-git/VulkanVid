@@ -1,13 +1,22 @@
+/******************************************************************************
+
+File        : main.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates an application object and then calls the
+				method to run vulkan.
+
+History     :	- v1.00 Adding the code below
+				
+******************************************************************************/
+
 #include "application.hpp"
 #include<cstdlib>
 #include<iostream>
 #include<stdexcept>
-
-/*
-* got to video 4 10 min 30 in
-*/
-
-
 
 using namespace std;
 
