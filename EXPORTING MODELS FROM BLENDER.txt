@@ -1,0 +1,15 @@
+1. Select model in object mode
+2. Shade flat
+3. Export wavefront (.obj)
+4. Transform modifications:
+	* path mode: auto
+	* Forward: z forward
+	* Up: -y up
+   Geometry:
+	* Apply modifiers
+	* Write Normals
+	* Include UVs
+	* Triangulate Faces
+	* The rest is unticked
+
+
