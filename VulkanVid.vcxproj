@@ -167,6 +167,7 @@
   <ItemGroup>
     <ClCompile Include="application.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="keyboardMovement.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="device.cpp" />

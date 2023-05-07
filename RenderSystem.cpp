@@ -13,7 +13,7 @@ namespace lve
 	struct SimplePushConstantData
 	{
 		glm::mat4 transform{ 1.f };
-		glm::mat4 modelMatrix{ 1.f };
+		glm::mat4 normalMatrix{ 1.f };
 	};
 
 	RenderSystem::RenderSystem(LveDevice &device, VkRenderPass renderPass) : lveDevice{device}
@@ -84,7 +84,7 @@ namespace lve
 			SimplePushConstantData push{};
 			auto modelMatrix = obj.transform.mat4();
 			push.transform = projectionView * modelMatrix;
-			push.modelMatrix = modelMatrix;
+			push.normalMatrix = obj.transform.normalMatrix();
 
 			vkCmdPushConstants(
 				commandBuffer,

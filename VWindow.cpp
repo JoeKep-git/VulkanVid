@@ -36,11 +36,6 @@ namespace lve
 			throw runtime_error("failed to create window surface");
 		}
 	}
-	//put this under create window surface
-	bool VWindow::shouldClose()
-	{
-		return glfwWindowShouldClose(window);
-	}
 
 	void VWindow::framebufferResizeCallback(GLFWwindow* window, int width, int height)
 	{
@@ -50,6 +45,10 @@ namespace lve
 		vWindow->height = height;
 	}
 
-
+	//put this under create window surface
+	bool VWindow::shouldClose()
+	{
+		return glfwWindowShouldClose(window);
+	}
 }
 

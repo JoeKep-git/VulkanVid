@@ -135,7 +135,9 @@ namespace lve
 
 		auto cube = GameObject::createGameObject();
 		cube.model = model;
+		//value of translation in position 2 can make the object have a more faceted appearance (polygon look)
 		cube.transform.translation = { .0f,.0f,2.5f };
+		//changing scale can squish the object or enlarge
 		cube.transform.scale = { .5f, .5f, .5f };
 		gameObjects.push_back(std::move(cube));
 	}
