@@ -8,6 +8,10 @@ using namespace std;
 #include <stdexcept>
 #include <iostream>
 
+#ifndef ENGINE_DIR
+#define ENGINE_DIR "../"
+#endif
+
 namespace lve 
 {
 	PipeLine::PipeLine(
@@ -29,7 +33,8 @@ namespace lve
 
 	std::vector<char> PipeLine::readFile(const std::string& filePath)
 	{
-		std::ifstream file{ filePath, std::ios::ate | std::ios::binary };
+		std::string enginePath = ENGINE_DIR + filePath;
+		std::ifstream file{ enginePath, std::ios::ate | std::ios::binary };
 
 		if (!file.is_open())
 		{
