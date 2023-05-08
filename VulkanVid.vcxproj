@@ -168,6 +168,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="buffer.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="descriptors.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="keyboardMovement.cpp" />
     <ClCompile Include="main.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="application.hpp" />
     <ClInclude Include="buffer.hpp" />
     <ClInclude Include="camera.hpp" />
+    <ClInclude Include="descriptors.hpp" />
     <ClInclude Include="device.hpp" />
     <ClInclude Include="engineSwapChain.hpp" />
     <ClInclude Include="frameInfo.hpp" />

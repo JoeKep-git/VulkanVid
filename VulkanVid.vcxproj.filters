@@ -66,6 +66,9 @@
     <ClCompile Include="buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="descriptors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.hpp">
@@ -108,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="frameInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="descriptors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

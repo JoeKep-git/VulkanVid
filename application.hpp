@@ -4,6 +4,7 @@
 #include "device.hpp"
 #include "gameObject.hpp"
 #include "Renderer.hpp"
+#include "descriptors.hpp"
 
 //std
 #include <memory>
@@ -31,6 +32,8 @@ namespace lve {
 		LveDevice lveDevice{ vWindow };
 		Renderer renderer{ vWindow, lveDevice };
 
+		//order of declaration matters here
+		std::unique_ptr<LveDescriptorPool> globalPool{};
 		std::vector <GameObject> gameObjects;
 	};
 }
