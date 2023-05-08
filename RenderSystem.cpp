@@ -70,9 +70,7 @@ namespace lve
 			pipelineConfig);
 	}
 
-	void RenderSystem::renderGameObjects(
-		FrameInfo &frameInfo,
-		std::vector<GameObject>& gameObjects)
+	void RenderSystem::renderGameObjects(FrameInfo &frameInfo)
 	{
 		lvePipeline->bind(frameInfo.commandBuffer);
 
@@ -92,8 +90,11 @@ namespace lve
 		//float far = 10.f;
 		//auto perspective = perspectiveProjection(fovy, aspectRatio, near, far);
 
-		for (auto& obj : gameObjects)
+		//kv => (objid, gameobj)
+		for (auto& kv : frameInfo.gameObjects)
 		{
+			auto& obj = kv.second;
+			if (obj.model == nullptr) continue;
 			SimplePushConstantData push{};
 			push.modelMatrix = obj.transform.mat4();
 			push.normalMatrix = obj.transform.normalMatrix();
