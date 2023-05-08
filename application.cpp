@@ -18,9 +18,10 @@ namespace lve
 {
 	struct GlobalUbo
 	{
-		alignas(16) glm::mat4 projectionView{ 1.f };
-		alignas(16) glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
-		//alignas(16) glm::vec3 pointLight;
+		glm::mat4 projectionView{ 1.f };
+		glm::vec4 ambientLightColor{ 1.f,1.f,1.f,.02f }; //w is light intensity
+		glm::vec3 lightPosition{ -1.f };
+		alignas(16) glm::vec4 lightColor{ 1.f }; //w is light intensity
 	};
 
 	FirstApplication::FirstApplication()
@@ -84,6 +85,7 @@ namespace lve
 		camera.setViewTarget(glm::vec3(-1.f, -2.f, 2.f), glm::vec3(0.f, 0.f, 2.5f));
 
 		auto viewerObject = GameObject::createGameObject();
+		viewerObject.transform.translation.z = -2.5f;
 		KeyboardMovement cameraController{};
 
 		auto currentTime = std::chrono::high_resolution_clock::now();
@@ -196,15 +198,29 @@ namespace lve
 	{
 		std::cout << "loading game object\n";
 		//std::shared_ptr<Model> model = createCubeModel(lveDevice, { .0f,.0f,.0f });
-		std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/colored_cube.obj");
+		//std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/colored_cube.obj");
 
-		auto cube = GameObject::createGameObject();
-		cube.model = model;
-		//value of translation in position 2 can make the object have a more faceted appearance (polygon look)
-		cube.transform.translation = { .0f,.0f,2.5f };
-		//changing scale can squish the object or enlarge
-		cube.transform.scale = { .5f, .5f, .5f };
-		gameObjects.push_back(std::move(cube));
+	//	auto cube = GameObject::createGameObject();
+	//	cube.model = model;
+	//	//value of translation in position 2 can make the object have a more faceted appearance (polygon look)
+	//	cube.transform.translation = { .0f,.0f,2.5f };
+	//	//changing scale can squish the object or enlarge
+	//	cube.transform.scale = { .5f, .5f, .5f };
+	//	gameObjects.push_back(std::move(cube));
+
+		std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/flat_vase.obj");
+		auto flatVase = GameObject::createGameObject();
+		flatVase.model = model;
+		flatVase.transform.translation = { -.5f,.5f,0.f };
+		flatVase.transform.scale = { 3.f,1.5f,3.f };
+		gameObjects.push_back(std::move(flatVase));
+
+		model = Model::createModelFromFile(lveDevice, "models/smooth_vase.obj");
+		auto smoothVase = GameObject::createGameObject();
+		smoothVase.model = model;
+		smoothVase.transform.translation = { .5f,.5f,0.f };
+		smoothVase.transform.scale = { 3.f,1.5f,3.f };
+		gameObjects.push_back(std::move(smoothVase));
 	}
 }
 
