@@ -1,5 +1,6 @@
 #include "application.hpp"
 #include "RenderSystem.hpp"
+#include "pointLightSystem.hpp"
 #include "camera.hpp"
 #include "keyboardMovement.hpp"
 #include <stdexcept>
@@ -81,6 +82,10 @@ namespace lve
 			lveDevice, 
 			renderer.getSwapChainRenderPass(), 
 			globalSetLayout->getDescriptorSetLayout()};
+		PointLightSystem pointLightSystem{
+			lveDevice,
+			renderer.getSwapChainRenderPass(),
+			globalSetLayout->getDescriptorSetLayout() };
 		Camera camera{};
 		//camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f, 0.f, 1.f));
 		camera.setViewTarget(glm::vec3(-1.f, -2.f, 2.f), glm::vec3(0.f, 0.f, 2.5f));
@@ -134,6 +139,7 @@ namespace lve
 				//render
 				renderer.beginSwapChainRenderPass(commandBuffer);
 				renderSystem.renderGameObjects(frameInfo);
+				pointLightSystem.render(frameInfo);
 				renderer.endSwapChainRenderPass(commandBuffer);
 				renderer.endFrame();
 			}

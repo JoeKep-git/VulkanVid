@@ -35,7 +35,7 @@ namespace lve
 		if (!file.is_open())
 		{
 			//filepath is incorrect or do not have permissions
-			throw runtime_error("failed to open file: " + filePath);
+			throw runtime_error("failed to open file: " + enginePath);
 		}
 
 		size_t fileSize = static_cast<size_t>(file.tellg());
