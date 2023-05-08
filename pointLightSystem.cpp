@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <iostream>
+#include <map>
 
 namespace lve
 {
@@ -61,6 +62,7 @@ namespace lve
 
 		PipelineConfigInfo pipelineConfig{};
 		PipeLine::defaultPipeLineConfigInfo(pipelineConfig);
+		PipeLine::enableAlphaBlending(pipelineConfig);
 		pipelineConfig.attributeDescriptions.clear();
 		pipelineConfig.bindingDescriptions.clear();
 		pipelineConfig.renderPass = renderPass;
@@ -88,7 +90,8 @@ namespace lve
 			assert(lightIndex < MAX_LIGHTS && "Point lights exceed maximum specified");
 
 			//update light position
-			obj.transform.translation = glm::vec3(rotateLight * glm::vec4(obj.transform.translation, 1.f));
+			//obj.transform.translation = glm::vec3(rotateLight * glm::vec4(obj.transform.translation, 1.f));
+			//glm::vec4(obj.transform.translation, 1.f));
 
 			//copy light to ubo
 			ubo.pointLights[lightIndex].position = glm::vec4(obj.transform.translation, 1.f);
@@ -101,6 +104,20 @@ namespace lve
 
 	void PointLightSystem::render(FrameInfo& frameInfo)
 	{
+		//sort lights
+		std::map<float, GameObject::id_t> sorted;
+		for (auto& kv : frameInfo.gameObjects)
+		{
+			auto& obj = kv.second;
+
+			if (obj.pointLight == nullptr) continue;
+
+			//calc dis
+			auto offset = frameInfo.camera.getPosition() - obj.transform.translation;
+			float disSquared = glm::dot(offset, offset);
+			sorted[disSquared] = obj.getId();
+		}
+
 		lvePipeline->bind(frameInfo.commandBuffer);
 
 		vkCmdBindDescriptorSets(
@@ -113,10 +130,11 @@ namespace lve
 			0,
 			nullptr);
 
-		for (auto& kv : frameInfo.gameObjects)
+		//iterate through the sorted lights but in the reverse order
+		for (auto iterate = sorted.rbegin(); iterate != sorted.rend(); ++iterate)
 		{
-			auto& obj = kv.second;
-			if (obj.pointLight == nullptr) continue;
+			//using gameobject id in order to find the light object 
+			auto& obj = frameInfo.gameObjects.at(iterate->second);
 
 			PointLightPushConstants push{};
 			push.position = glm::vec4(obj.transform.translation, 1.f);

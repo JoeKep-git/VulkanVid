@@ -49,6 +49,7 @@ namespace lve {
 		void bind(VkCommandBuffer commandBuffer);
 
 		static void defaultPipeLineConfigInfo(PipelineConfigInfo& configInfo);
+		static void enableAlphaBlending(PipelineConfigInfo& configInfo);
 
 	private:
 		static std::vector<char> readFile(const std::string& filePath);
