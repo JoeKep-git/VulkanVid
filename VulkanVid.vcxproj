@@ -166,6 +166,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="buffer.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="keyboardMovement.cpp" />
@@ -181,9 +182,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.hpp" />
+    <ClInclude Include="buffer.hpp" />
     <ClInclude Include="camera.hpp" />
     <ClInclude Include="device.hpp" />
     <ClInclude Include="engineSwapChain.hpp" />
+    <ClInclude Include="frameInfo.hpp" />
     <ClInclude Include="gameObject.hpp" />
     <ClInclude Include="keyboardMovement.hpp" />
     <ClInclude Include="model.hpp" />

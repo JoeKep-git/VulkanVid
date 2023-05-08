@@ -65,13 +65,12 @@ namespace lve
 	}
 
 	void RenderSystem::renderGameObjects(
-		VkCommandBuffer commandBuffer,
-		std::vector<GameObject>& gameObjects,
-		const Camera& camera)
+		FrameInfo &frameInfo,
+		std::vector<GameObject>& gameObjects)
 	{
-		lvePipeline->bind(commandBuffer);
+		lvePipeline->bind(frameInfo.commandBuffer);
 
-		auto projectionView = camera.getProjection() * camera.getView();
+		auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView();
 
 		//float fovy = glm::radians(45.f);
 		//float aspectRatio = 800.f / 600.f;
@@ -87,14 +86,14 @@ namespace lve
 			push.normalMatrix = obj.transform.normalMatrix();
 
 			vkCmdPushConstants(
-				commandBuffer,
+				frameInfo.commandBuffer,
 				pipelineLayout,
 				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
 				0,
 				sizeof(SimplePushConstantData),
 				&push);
-			obj.model->bind(commandBuffer);
-			obj.model->draw(commandBuffer);
+			obj.model->bind(frameInfo.commandBuffer);
+			obj.model->draw(frameInfo.commandBuffer);
 		}
 	}
 }

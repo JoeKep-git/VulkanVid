@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <array>
 #include <chrono>
+#include "buffer.hpp"
+#include <numeric>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -14,6 +16,12 @@
 
 namespace lve
 {
+	struct GlobalUbo
+	{
+		glm::mat4 projectionView{ 1.f };
+		glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
+	};
+
 	FirstApplication::FirstApplication()
 	{
 		loadGameObjects();
@@ -26,6 +34,24 @@ namespace lve
 
 	void FirstApplication::run()
 	{
+		//finds the lowest common multiple
+		auto minOffsetAlignment = std::lcm(
+			lveDevice.properties.limits.minUniformBufferOffsetAlignment,
+			lveDevice.properties.limits.nonCoherentAtomSize
+		);
+
+		Buffer globalUboBuffer
+		{
+			lveDevice,
+			sizeof(GlobalUbo),
+			LveSwapChain::MAX_FRAMES_IN_FLIGHT,
+			VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
+			lveDevice.properties.limits.minUniformBufferOffsetAlignment,
+		};
+
+		globalUboBuffer.map();
+
 		RenderSystem renderSystem{ lveDevice, renderer.getSwapChainRenderPass() };
 		Camera camera{};
 		//camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f, 0.f, 1.f));
@@ -58,12 +84,24 @@ namespace lve
 
 			if (auto commandBuffer = renderer.beginFrame())
 			{
-				//begin offscreen shadow pass
-				//render shadow casting objects
-				//end offscreen shadow pass
+				int frameIndex = renderer.getFrameIndex();
+				FrameInfo frameInfo
+				{
+					frameIndex,
+					frameTime,
+					commandBuffer,
+					camera
+				};
 
+				//update
+				GlobalUbo ubo{};
+				ubo.projectionView = camera.getProjection() * camera.getView();
+				globalUboBuffer.writeToIndex(&ubo, frameIndex);
+				globalUboBuffer.flushIndex(frameIndex);
+
+				//render
 				renderer.beginSwapChainRenderPass(commandBuffer);
-				renderSystem.renderGameObjects(commandBuffer, gameObjects, camera);
+				renderSystem.renderGameObjects(frameInfo, gameObjects);
 				renderer.endSwapChainRenderPass(commandBuffer);
 				renderer.endFrame();
 			}
