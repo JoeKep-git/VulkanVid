@@ -53,8 +53,9 @@ namespace lve
 		assert(pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout");
 
 		PipelineConfigInfo pipelineConfig{};
-		PipeLine::defaultPipeLineConfigInfo(
-			pipelineConfig);
+		PipeLine::defaultPipeLineConfigInfo(pipelineConfig);
+		pipelineConfig.attributeDescriptions.clear();
+		pipelineConfig.bindingDescriptions.clear();
 		pipelineConfig.renderPass = renderPass;
 		pipelineConfig.pipelineLayout = pipelineLayout;
 		lvePipeline = std::make_unique<PipeLine>(
