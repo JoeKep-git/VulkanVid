@@ -89,6 +89,8 @@ namespace lve
 
 		while (!vWindow.shouldClose())
 		{
+			//RUNS EVERY FRAME (INPUT FPS CHECKER HERE)
+
 			glfwPollEvents();
 
 			float MAX_FRAME_TIME = 60.f;
