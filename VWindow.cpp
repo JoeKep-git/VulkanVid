@@ -44,11 +44,11 @@ namespace lve
 		vWindow->width = width;
 		vWindow->height = height;
 	}
+
 	//put this under create window surface
 	bool VWindow::shouldClose()
 	{
 		return glfwWindowShouldClose(window);
 	}
-
 }
 

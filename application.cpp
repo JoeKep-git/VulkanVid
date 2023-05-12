@@ -234,6 +234,7 @@ namespace lve
 		floor.transform.scale = { 3.f,1.f,3.f };
 		gameObjects.emplace(floor.getId(), std::move(floor));
 
+		//Add more lights here as the for loop iterates thorough the size of the array and adds them
 		std::vector<glm::vec3> lightColors
 		{
 			{1.f, .1f, .1f},
@@ -241,7 +242,10 @@ namespace lve
 			{.1f, 1.f, .1f},
 			{1.f, 1.f, .1f},
 			{.1f, 1.f, 1.f},
-			{1.f, 1.f, 1.f}
+			{1.f, 1.f, 1.f},
+			{0.5f, 0.5f, 0.5f},
+			{0.1f,0.1f,0.1f},
+			{1.f, 0.5f, 0.5f}
 		};
 		
 		for (int i = 0; i < lightColors.size(); i++)
