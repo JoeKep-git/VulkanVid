@@ -23,6 +23,18 @@ float timeOfTest = 0.0f;
 float timeTest = 0.0f;
 int framerate = 0;
 
+const double PI = 3.14159265358979323846f;
+
+float* verts = nullptr;
+float* norms = nullptr;
+unsigned int* tInds = nullptr;
+
+float cx, cy, cz; //centre of sphere
+float r; //radius of spheres
+
+int numOfVerts;
+int numOfTris;
+
 namespace lve
 {
 	FirstApplication::FirstApplication()
@@ -111,25 +123,6 @@ namespace lve
 
 			timeOfTest += fDeltaTime;
 
-			//checks to see if certain amount of seconds has passed in the real world and adds the framerate
-			//to the file
-			if (timeTest < 1.0)
-			{
-				timeTest += fDeltaTime;
-				framerate++;
-			}
-			else
-			{
-				print.printingMethod(framerate);
-				if (timeOfTest >= 13.0f)
-				{
-					vWindow.shouldClose();
-					break;
-				}
-				framerate = 0;
-				timeTest = 0.0f;
-			}
-
 			float MAX_FRAME_TIME = 60.f;
 
 			auto newTime = std::chrono::high_resolution_clock::now();
@@ -148,6 +141,25 @@ namespace lve
 
 			if (auto commandBuffer = renderer.beginFrame())
 			{
+				//checks to see if certain amount of seconds has passed in the real world and adds the framerate
+				//to the file
+				if (timeTest < 1.0)
+				{
+					timeTest += fDeltaTime;
+					framerate++;
+				}
+				else
+				{
+					print.printingMethod(framerate);
+					if (timeOfTest >= 100.0f)
+					{
+						vWindow.shouldClose();
+						break;
+					}
+					framerate = 0;
+					timeTest = 0.0f;
+				}
+
 				int frameIndex = renderer.getFrameIndex();
 				FrameInfo frameInfo
 				{
@@ -252,52 +264,60 @@ namespace lve
 	//	cube.transform.scale = { .5f, .5f, .5f };
 	//	gameObjects.push_back(std::move(cube));
 
-		std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/flat_vase.obj");
-		auto flatVase = GameObject::createGameObject();
-		flatVase.model = model;
-		flatVase.transform.translation = { -.5f,.5f,0.f };
-		flatVase.transform.scale = { 3.f,1.5f,3.f };
-		gameObjects.emplace(flatVase.getId(), std::move(flatVase));
+		//std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/flat_vase.obj");
+		//auto flatVase = GameObject::createGameObject();
+		//flatVase.model = model;
+		//flatVase.transform.translation = { -.5f,.5f,0.f };
+		//flatVase.transform.scale = { 3.f,1.5f,3.f };
+		//gameObjects.emplace(flatVase.getId(), std::move(flatVase));
 
-		model = Model::createModelFromFile(lveDevice, "models/smooth_vase.obj");
-		auto smoothVase = GameObject::createGameObject();
-		smoothVase.model = model;
-		smoothVase.transform.translation = { .5f,.5f,0.f };
-		smoothVase.transform.scale = { 3.f,1.5f,3.f };
-		gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
+		//model = Model::createModelFromFile(lveDevice, "models/smooth_vase.obj");
+		//auto smoothVase = GameObject::createGameObject();
+		//smoothVase.model = model;
+		//smoothVase.transform.translation = { .5f,.5f,0.f };
+		//smoothVase.transform.scale = { 3.f,1.5f,3.f };
+		//gameObjects.emplace(smoothVase.getId(), std::move(smoothVase));
 
-		model = Model::createModelFromFile(lveDevice, "models/quad.obj");
-		auto floor = GameObject::createGameObject();
-		floor.model = model;
-		floor.transform.translation = { 0.f,.5f,0.f };
-		floor.transform.scale = { 3.f,1.f,3.f };
-		gameObjects.emplace(floor.getId(), std::move(floor));
+		//model = Model::createModelFromFile(lveDevice, "models/quad.obj");
+		//auto floor = GameObject::createGameObject();
+		//floor.model = model;
+		//floor.transform.translation = { 0.f,.5f,0.f };
+		//floor.transform.scale = { 3.f,1.f,3.f };
+		//gameObjects.emplace(floor.getId(), std::move(floor));
+
+		//model = Model::createModelFromFile(lveDevice, "models/sphere3145728.obj");
+		std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/sphere3145728.obj");
+		auto sphere = GameObject::createGameObject();
+		sphere.model = model;
+		sphere.transform.translation = { 0.f,0.f,0.f };
+		sphere.transform.scale = { 1.f,1.f,1.f };
+		gameObjects.emplace(sphere.getId(), std::move(sphere));
 
 		//Add more lights here as the for loop iterates thorough the size of the array and adds them
-		std::vector<glm::vec3> lightColors
-		{
-			{1.f, .1f, .1f},
-			{.1f, .1f, 1.f},
-			{.1f, 1.f, .1f},
-			{1.f, 1.f, .1f},
-			{.1f, 1.f, 1.f},
-			{1.f, 1.f, 1.f},
-			{0.5f, 0.5f, 0.5f},
-			{0.1f,0.1f,0.1f},
-			{1.f, 0.5f, 0.5f}
-		};
-		
-		for (int i = 0; i < lightColors.size(); i++)
-		{
-			auto pointLight = GameObject::makePointLight(0.2f);
-			pointLight.color = lightColors[i];
-			auto rotateLight = glm::rotate(
-				glm::mat4(1.f),
-				(i * glm::two_pi<float>()) / lightColors.size(),
-				{ 0.f, -1.f, 0.f });
-			pointLight.transform.translation = glm::vec3(rotateLight * glm::vec4(-1.f, -1.f, -1.f, 1.f));
-			gameObjects.emplace(pointLight.getId(), std::move(pointLight));
-		}
+		//std::vector<glm::vec3> lightColors
+		//{
+		//	{1.f, .1f, .1f},
+		//	{.1f, .1f, 1.f},
+		//	{.1f, 1.f, .1f},
+		//	{1.f, 1.f, .1f},
+		//	{.1f, 1.f, 1.f},
+		//	{1.f, 1.f, 1.f},
+		//	{0.5f, 0.5f, 0.5f},
+		//	{0.1f,0.1f,0.1f},
+		//	{1.f, 0.5f, 0.5f}
+		//};
+		//
+		//for (int i = 0; i < lightColors.size(); i++)
+		//{
+		//	auto pointLight = GameObject::makePointLight(0.2f);
+		//	pointLight.color = lightColors[i];
+		//	auto rotateLight = glm::rotate(
+		//		glm::mat4(1.f),
+		//		(i * glm::two_pi<float>()) / lightColors.size(),
+		//		{ 0.f, -1.f, 0.f });
+		//	pointLight.transform.translation = glm::vec3(rotateLight * glm::vec4(-1.f, -1.f, -1.f, 1.f));
+		//	gameObjects.emplace(pointLight.getId(), std::move(pointLight));
+		//}
 	}
 }
 
