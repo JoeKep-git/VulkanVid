@@ -8,6 +8,7 @@
 #include <chrono>
 #include "buffer.hpp"
 #include <numeric>
+#include "printToFile.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -92,6 +93,8 @@ namespace lve
 		viewerObject.transform.translation.z = -2.5f;
 		KeyboardMovement cameraController{};
 
+		PrintToFile print{};
+
 		auto currentTime = std::chrono::high_resolution_clock::now();
 
 		while (!vWindow.shouldClose())
@@ -99,6 +102,7 @@ namespace lve
 			//RUNS EVERY FRAME (INPUT FPS CHECKER HERE)
 			glfwPollEvents();
 
+			//calculate the deltatime
 			currentTicks = std::clock();
 			float deltaTicks = (float)(currentTicks - previousTicks);
 			previousTicks = currentTicks;
@@ -107,6 +111,8 @@ namespace lve
 
 			timeOfTest += fDeltaTime;
 
+			//checks to see if certain amount of seconds has passed in the real world and adds the framerate
+			//to the file
 			if (timeTest < 1.0)
 			{
 				timeTest += fDeltaTime;
@@ -114,7 +120,7 @@ namespace lve
 			}
 			else
 			{
-				cout << framerate << endl;
+				print.printingMethod(framerate);
 				if (timeOfTest >= 13.0f)
 				{
 					vWindow.shouldClose();

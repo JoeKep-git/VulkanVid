@@ -5,14 +5,14 @@
 
 using namespace std;
 
-class printToFile
+class PrintToFile
 {
 private:
 	ofstream myFile;
 
 
 public:
-	printToFile();
+	PrintToFile();
 	void printingMethod(int fps);
 	void closeFile();
 };

@@ -51,6 +51,8 @@ namespace lve
 		return glfwWindowShouldClose(window);
 	}
 
+
+	//forcefully closes the window
 	void VWindow::closeWindow()
 	{
 		glfwDestroyWindow(window);

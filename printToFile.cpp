@@ -1,16 +1,16 @@
 #include "printToFile.hpp"
 
-printToFile::printToFile()
+PrintToFile::PrintToFile()
 {
 	myFile.open("fpsPolygonsTest.txt");
 }
 
-void printToFile::printingMethod(int fps)
+void PrintToFile::printingMethod(int fps)
 {
 	myFile << fps << endl;
 }
 
-void printToFile::closeFile()
+void PrintToFile::closeFile()
 {
 	myFile.close();
 }
