@@ -50,5 +50,10 @@ namespace lve
 	{
 		return glfwWindowShouldClose(window);
 	}
+
+	void VWindow::closeWindow()
+	{
+		glfwDestroyWindow(window);
+	}
 }
 

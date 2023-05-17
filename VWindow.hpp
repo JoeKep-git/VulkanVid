@@ -22,6 +22,8 @@ namespace lve
 
 		bool shouldClose();
 
+		void closeWindow();
+
 		VkExtent2D getExtent() { return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) }; }
 
 		bool wasWindowResized() { return framebufferResized; }

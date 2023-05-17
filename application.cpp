@@ -15,6 +15,13 @@
 #include <glm/gtc/constants.hpp>
 #include <iostream>
 
+float currentTicks = 0.0f;
+float previousTicks = 0.0f;
+float fDeltaTime = 0.0f;
+float timeOfTest = 0.0f;
+float timeTest = 0.0f;
+int framerate = 0;
+
 namespace lve
 {
 	FirstApplication::FirstApplication()
@@ -90,8 +97,32 @@ namespace lve
 		while (!vWindow.shouldClose())
 		{
 			//RUNS EVERY FRAME (INPUT FPS CHECKER HERE)
-
 			glfwPollEvents();
+
+			currentTicks = std::clock();
+			float deltaTicks = (float)(currentTicks - previousTicks);
+			previousTicks = currentTicks;
+
+			fDeltaTime = deltaTicks / (float)CLOCKS_PER_SEC;
+
+			timeOfTest += fDeltaTime;
+
+			if (timeTest < 1.0)
+			{
+				timeTest += fDeltaTime;
+				framerate++;
+			}
+			else
+			{
+				cout << framerate << endl;
+				if (timeOfTest >= 13.0f)
+				{
+					vWindow.shouldClose();
+					break;
+				}
+				framerate = 0;
+				timeTest = 0.0f;
+			}
 
 			float MAX_FRAME_TIME = 60.f;
 
