@@ -45,12 +45,12 @@ namespace lve
 		vWindow->height = height;
 	}
 
-
 	//put this under create window surface
 	bool VWindow::shouldClose()
 	{
 		return glfwWindowShouldClose(window);
 	}
+
 
 	//forcefully closes the window
 	void VWindow::closeWindow()
