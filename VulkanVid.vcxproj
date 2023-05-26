@@ -185,6 +185,7 @@
     <ClCompile Include="printToFile.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="VWindow.hpp" />
     <ClCompile Include="VWindow.cpp" />
   </ItemGroup>
@@ -204,6 +205,7 @@
     <ClInclude Include="printToFile.hpp" />
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="RenderSystem.hpp" />
+    <ClInclude Include="Sphere.hpp" />
     <ClInclude Include="tinyobj\tiny_obj_loader.h" />
     <ClInclude Include="util.hpp" />
   </ItemGroup>

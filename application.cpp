@@ -9,6 +9,7 @@
 #include "buffer.hpp"
 #include <numeric>
 #include "printToFile.hpp"
+#include "Sphere.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -22,16 +23,6 @@ float fDeltaTime = 0.0f;
 float timeOfTest = 0.0f;
 float timeTest = 0.0f;
 int framerate = 0;
-
-const double PI = 3.14159265358979323846f;
-
-//float* verts = nullptr;
-//float* norms = nullptr;
-//unsigned int* tInds = nullptr;
-
-
-//int numOfVerts;
-//int numOfTris;
 
 namespace lve
 {
@@ -106,6 +97,7 @@ namespace lve
 		PrintToFile print{};
 
 		auto currentTime = std::chrono::high_resolution_clock::now();
+		glfwSwapInterval(0);
 
 		while (!vWindow.shouldClose())
 		{
@@ -149,7 +141,7 @@ namespace lve
 				else
 				{
 					print.printingMethod(framerate);
-					if (timeOfTest >= 100.0f)
+					if (timeOfTest >= 63.0f)
 					{
 						vWindow.shouldClose();
 						break;
@@ -191,110 +183,6 @@ namespace lve
 		}
 
 		vkDeviceWaitIdle(lveDevice.device());
-	}
-
-	std::unique_ptr<Model> createSphere(LveDevice& device, int level)
-	{
-		Model::Builder modelBuilder{};
-
-		float cx = .0f, cy = .0f, cz = .0f; //centre of sphere
-		float r = 2; //radius of spheres
-		int vertAmount = ((level - 2) * level + 2) * 3;
-		float* verts = new float[vertAmount];
-
-		int NormsAmount = ((level - 2) * level + 2) * 3;
-		float* norms = new float[NormsAmount];
-
-		int TindsAmount = (((level - 3) * (level - 1) + (level - 1)) * 2) * 3;
-		unsigned int* tInds = new unsigned int[TindsAmount];
-		
-
-		int numOfTris = (((level - 3) * (level - 1) + (level - 1)) * 2);
-		int numOfVerts = ((level - 2) * level + 2);
-
-		//populate the arrays
-		float theta, phi;
-		int vertCount = 0;
-		int i, j, t;
-
-		for (t = 0, j = 1; j < level - 1; j++)
-		{
-			for (i = 0; i < level; i++)
-			{
-				theta = float(j) / (level - 1) * PI;
-				phi = float(i) / (level - 1) * PI * 2;
-
-				verts[vertCount + t] = ((sinf(theta) * cosf(phi)) * r) + cx;
-				verts[vertCount + t + 1] = (cosf(theta) * r) + cy;
-				verts[vertCount + t + 2] = ((-sinf(theta) * sinf(phi)) * r) + cz;
-
-				norms[vertCount + t] = (sinf(theta) * cosf(phi));
-				norms[vertCount + t + 1] = cosf(theta);
-				norms[vertCount + t + 2] = -(sinf(theta) * sinf(phi));
-
-				t += 3;
-			}
-		}
-		verts[vertCount + t] = cx;
-		verts[vertCount + t + 1] = r + cy;
-		verts[vertCount + t + 2] = cz;
-
-		norms[vertCount + t] = 0;
-		norms[vertCount + t + 1] = 1;
-		norms[vertCount + t + 2] = 0;
-		t += 3;
-
-		verts[vertCount + t] = cx;
-		verts[vertCount + t + 1] = -r + cy;
-		verts[vertCount + t + 2] = cz;
-
-		norms[vertCount + t] = 0;
-		norms[vertCount + t + 1] = -1;
-		norms[vertCount + t + 2] = 0;
-		t += 3;
-
-		int vc3 = vertCount / 3;
-		int triCount = 0;
-		for (t = 0, j = 0; j < level - 3; j++)
-		{
-			for (i = 0; i < level - 1; i++)
-			{
-				tInds[triCount + t] = vc3 + ((j)*level + i);    t++;
-				tInds[triCount + t] = vc3 + ((j + 1) * level + i + 1);    t++;
-				tInds[triCount + t] = vc3 + ((j)*level + i + 1);    t++;
-				tInds[triCount + t] = vc3 + ((j)*level + i);    t++;
-				tInds[triCount + t] = vc3 + ((j + 1) * level + i);    t++;
-				tInds[triCount + t] = vc3 + ((j + 1) * level + i + 1);  t++;
-			}
-		}
-		for (i = 0; i < level - 1; i++)
-		{
-			tInds[triCount + t] = vc3 + ((level - 2) * level);  t++;
-			tInds[triCount + t] = vc3 + (i);    t++;
-			tInds[triCount + t] = vc3 + (i + 1);    t++;
-			tInds[triCount + t] = vc3 + ((level - 2) * level + 1);    t++;
-			tInds[triCount + t] = vc3 + ((level - 3) * level + i + 1);    t++;
-			tInds[triCount + t] = vc3 + ((level - 3) * level + i);  t++;
-		}
-		triCount += t;
-
-		cout << "Num of verts: " << numOfVerts << endl;
-		for (int x = 0; x < vertAmount; x += 3)
-		{
-			modelBuilder.vertices.push_back(Model::Vertex(glm::vec3(verts[x], verts[x + 1], verts[x + 2]), glm::vec3(1.f, 1.f, 1.f)));
-		}
-
-		for (int x = 0; x < TindsAmount; x++)
-		{
-			modelBuilder.indices.push_back((uint32_t)tInds[x]);
-		}
-
-		for (auto& v : modelBuilder.vertices)
-		{
-			v.position += glm::vec3(.0f,.0f,.0f);
-		}
-
-		return std::make_unique<Model>(device, modelBuilder);
 	}
 
 	// temporary helper function, creates a 1x1x1 cube centered at offset
@@ -356,7 +244,11 @@ namespace lve
 	{
 		std::cout << "loading game object\n";
 		//std::shared_ptr<Model> model = createCubeModel(lveDevice, { .0f,.0f,.0f });
-		std::shared_ptr<Model> model = createSphere(lveDevice, 20);
+		Sphere sphereClass;
+		sphereClass.setRadius(2.0f);
+		sphereClass.setCentre(.0f,.0f,.0f);
+
+		std::shared_ptr<Model> model = sphereClass.createSphere(lveDevice, 1700);
 		//std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/colored_cube.obj");
 
 		//auto cube = GameObject::createGameObject();
