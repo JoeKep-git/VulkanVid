@@ -2,6 +2,18 @@
 
 #include "model.hpp"
 
+/******************************************************************************
+
+File        : pipeline.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a pipeline object. This creates the vulkan pipeline. 
+			  Help from the vulkan tutorial videos referenced in report.
+******************************************************************************/
+
 using namespace std;
 
 #include <fstream>

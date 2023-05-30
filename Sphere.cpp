@@ -1,6 +1,20 @@
 #include "Sphere.hpp"
 #include <iostream>
 
+/******************************************************************************
+
+File        : sphere.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa/Stephen Laycock
+
+Description : This file creates a sphere object. Modified code provided by Stephen Laycock
+				during Graphics 2 modulem, to work with Vulkan.
+
+******************************************************************************/
+
+
 namespace lve
 {
 	std::unique_ptr<Model> Sphere::createSphere(LveDevice& device, int level)

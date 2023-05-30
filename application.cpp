@@ -17,6 +17,19 @@
 #include <glm/gtc/constants.hpp>
 #include <iostream>
 
+/******************************************************************************
+
+File        : application.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates an application object and then calls the
+				method to run vulkan.
+
+******************************************************************************/
+
 float currentTicks = 0.0f;
 float previousTicks = 0.0f;
 float fDeltaTime = 0.0f;
@@ -248,7 +261,7 @@ namespace lve
 		sphereClass.setRadius(2.0f);
 		sphereClass.setCentre(.0f,.0f,.0f);
 
-		std::shared_ptr<Model> model = sphereClass.createSphere(lveDevice, 1700);
+		std::shared_ptr<Model> model = sphereClass.createSphere(lveDevice, 1500);
 		//std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/colored_cube.obj");
 
 		//auto cube = GameObject::createGameObject();

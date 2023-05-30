@@ -1,5 +1,18 @@
 #include "device.hpp"
 
+/******************************************************************************
+
+File        : device.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a device object. This will be used to create the vulkan instance, 
+			  and the vulkan surface. It will also be used to pick the physical device, and create
+			  the logical device.
+******************************************************************************/
+
 // std headers
 #include <cstring>
 #include <iostream>

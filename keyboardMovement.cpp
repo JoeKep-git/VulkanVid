@@ -1,5 +1,18 @@
 #include "keyboardMovement.hpp"
 
+/******************************************************************************
+
+File        : keyboardMovement.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a keyboard movement object. Used to get keyboard
+			  inputs. Help from the vulkan tutorial videos
+			  referenced in report.
+******************************************************************************/
+
 namespace lve
 {
 	void KeyboardMovement::moveInPlaneXZ(

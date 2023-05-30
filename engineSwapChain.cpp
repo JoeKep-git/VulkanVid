@@ -1,5 +1,15 @@
 #include "engineSwapChain.hpp"
 
+/******************************************************************************
+
+File        : engineSwapChain.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates the swap chain for the engine.
+******************************************************************************/
 
 #include <array>
 #include <cstdlib>

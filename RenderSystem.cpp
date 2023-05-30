@@ -2,6 +2,18 @@
 #include <stdexcept>
 #include <array>
 
+/******************************************************************************
+
+File        : RenderSystem.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates the system that renders the objects in the scene.
+			  Help from the vulkan tutorial videos.
+******************************************************************************/
+
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>

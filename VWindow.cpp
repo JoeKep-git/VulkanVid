@@ -2,6 +2,18 @@
 #include <iostream>
 #include <stdexcept>
 
+/******************************************************************************
+
+File        : VWindow.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This creates a vulkan window. Help from the vulkan tutorial videos
+			  referenced in report.
+******************************************************************************/
+
 using namespace std;
 
 namespace lve

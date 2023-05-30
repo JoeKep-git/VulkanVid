@@ -1,6 +1,18 @@
 #include "model.hpp"
 #include "util.hpp"
 
+/******************************************************************************
+
+File        : model.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a camera object. Help from the vulkan tutorial videos
+              referenced in report.
+******************************************************************************/
+
 // libs
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>

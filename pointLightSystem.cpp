@@ -2,6 +2,18 @@
 #include <stdexcept>
 #include <array>
 
+/******************************************************************************
+
+File        : pointLightSystem.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a point light system. Currently not used but 
+			  will be used in the future. Help from the vulkan tutorial videos.
+******************************************************************************/
+
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>

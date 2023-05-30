@@ -3,6 +3,18 @@
 #include <cassert>
 #include <limits>
 
+/******************************************************************************
+
+File        : camera.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a camera object. Help from the vulkan tutorial videos
+			  referenced in report.
+******************************************************************************/
+
 namespace lve
 {
 	void Camera::setOrthographicProjection(

@@ -3,6 +3,18 @@
 #include <array>
 #include <cassert>
 
+/******************************************************************************
+
+File        : renderer.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : Handles Vulkan rendering. Help from the vulkan tutorial videos
+			  referenced in report.
+******************************************************************************/
+
 namespace lve
 {
 	Renderer::Renderer(VWindow& vWindow, LveDevice& device) : vWindow{ vWindow }, lveDevice{ device }
