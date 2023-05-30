@@ -261,6 +261,7 @@ namespace lve
 		sphereClass.setRadius(2.0f);
 		sphereClass.setCentre(.0f,.0f,.0f);
 
+		//change levels to increase detail of sphere
 		std::shared_ptr<Model> model = sphereClass.createSphere(lveDevice, 1500);
 		//std::shared_ptr<Model> model = Model::createModelFromFile(lveDevice, "models/colored_cube.obj");
 
