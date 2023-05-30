@@ -8,7 +8,8 @@ Date        : 2023
 
 Author      : Joey Keputa
 
-Description : This file creates the swap chain for the engine.
+Description : This file creates the swap chain for the engine. Help from the vulkan tutorial videos
+			  referenced in report.
 ******************************************************************************/
 
 #include <array>

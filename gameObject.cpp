@@ -1,5 +1,18 @@
 #include "gameObject.hpp"
 
+/******************************************************************************
+
+File        : gameObject.cpp
+
+Date        : 2023
+
+Author      : Joey Keputa
+
+Description : This file creates a game object. It is used to create a game object
+			  with a model, texture, and transform. Help from the vulkan tutorial videos
+			  referenced in report.
+******************************************************************************/
+
 namespace lve
 {
 	// Matrix corrsponds to Translate * Ry * Rx * Rz * Scale

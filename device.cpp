@@ -10,7 +10,8 @@ Author      : Joey Keputa
 
 Description : This file creates a device object. This will be used to create the vulkan instance, 
 			  and the vulkan surface. It will also be used to pick the physical device, and create
-			  the logical device.
+			  the logical device. Help from the vulkan tutorial videos
+			  referenced in report.
 ******************************************************************************/
 
 // std headers
